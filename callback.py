@@ -4,7 +4,6 @@ from aiogram.fsm.state import State, StatesGroup
 import utilite
 
 
-
 async def call_start(call: types.CallbackQuery, state: FSMContext):
     if call.data == 'start_income':
         await state.update_data(kind_of_pay='income')
@@ -14,32 +13,22 @@ async def call_start(call: types.CallbackQuery, state: FSMContext):
         await utilite.get_category(call.message, state)
     elif call.data == 'start_stat':
         await state.update_data(stat_date ='stat')
-        await utilite.get_date(call.message, state)
-    else: 
-        return
-    
+        await utilite.get_stat_date(call.message, state)
 
 async def call_category(call: types.CallbackQuery, state: FSMContext):
     if call.data == 'category_home':
         await state.update_data(kind_of_category='home')
-        await utilite.get_summa(call.message, state)
     elif call.data == 'category_food':
         await state.update_data(kind_of_category='food')
-        await utilite.get_summa(call.message, state)
     elif call.data == 'category_auto':
         await state.update_data(kind_of_category='auto')
-        await utilite.get_summa(call.message, state)
     elif call.data == 'category_save':
         await state.update_data(kind_of_category='save')
-        await utilite.get_summa(call.message, state)
     elif call.data == 'category_personal':
         await state.update_data(kind_of_category='personal')
-        await utilite.get_summa(call.message, state)
     elif call.data == 'category_rest':
         await state.update_data(kind_of_category='rest')
-        await utilite.get_summa(call.message, state)
-    else: 
-        return
+    await utilite.get_summa(call.message, state)
 
 async def call_date(call: types.CallbackQuery, state: FSMContext):
     if call.data == 'date_01':
@@ -66,8 +55,7 @@ async def call_date(call: types.CallbackQuery, state: FSMContext):
         await state.update_data(stat_date='11')
     elif call.data == 'date_12':
         await state.update_data(stat_date='12')
-    else: 
-        return
+    await utilite.get_date(call.message, state)
 
 async def call_cancel(call: types.CallbackQuery, state: FSMContext):
     await state.clear()
